@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    avatar: {
+        type: String,
+        default: 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg'
+    },
 },
     {
         timestamps: true
