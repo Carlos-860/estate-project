@@ -29,7 +29,7 @@ const OAuth = () => {
                 })
             })
 
-            const data = response.json();
+            const data = await response.json();
             dispatch(signInSuccess(data));
 
             navigate('/');
