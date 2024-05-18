@@ -1,10 +1,17 @@
+// Import libraries and packages
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser'
+
+// Import routes
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
+
+// Configure dotenv
 dotenv.config()
 
+// Connect to Mongo database
 mongoose.connect(process.env.MONGO)
     .then(() => {
         console.log('Connected to MongoDB!')
@@ -13,14 +20,21 @@ mongoose.connect(process.env.MONGO)
         console.log(err)
     })
 
-const app = express(); // creates an application
+// creates an application
+const app = express();
 
-app.use(express.json()); // allows json to be input to server
+// allows json to be input to server
+app.use(express.json());
 
+// allows cookie parsing
+app.use(cookieParser());
+
+// starts up server
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 })
 
+// render all routes
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 
