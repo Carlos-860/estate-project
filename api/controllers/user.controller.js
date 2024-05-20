@@ -14,6 +14,11 @@ export const test = async (req, res) => {
 export const updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id) return next(errorHandler(401, "You can only update your own account!"))
 
+        // Validation check for username
+    if (!req.body.username || req.body.username.trim() === "") {
+        return next(errorHandler(400, "Username is required and cannot be empty."));
+    }
+
     try {
         if (req.body.password) {
             req.body.password = bcryptjs.hashSync(req.body.password, 10)
