@@ -12,16 +12,16 @@ export const test = async (req, res) => {
 }
 
 export const updateUser = async (req, res, next) => {
-    if (req.user.id !== req.params.id) return next(errorHandler(401, "You can only update your own account!"))
+    if (req.user.id !== req.params.id) return next(errorHandler(401, "You can only update your own account!"));
 
-        // Validation check for username
+    // Validation check for username
     if (!req.body.username || req.body.username.trim() === "") {
         return next(errorHandler(400, "Username is required and cannot be empty."));
     }
 
     try {
         if (req.body.password) {
-            req.body.password = bcryptjs.hashSync(req.body.password, 10)
+            req.body.password = bcryptjs.hashSync(req.body.password, 10);
         }
 
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
@@ -31,13 +31,23 @@ export const updateUser = async (req, res, next) => {
                 password: req.body.password,
                 avatar: req.body.avatar,
             }
-
-
         }, { new: true });
 
         const { password, ...rest } = updatedUser._doc
 
         res.status(200).json(rest);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const deleteUser = async (req, res, next) => {
+    if (req.user.id !== req.params.id) return next(errorHandler(401, "You can only delete your own account!"));
+    try {
+        await User.findByIdAndDelete(req.params.id)
+
+        res.clearCookie('access_token')
+        res.status(200).json('User has been deleted!');
     } catch (error) {
         next(error)
     }
