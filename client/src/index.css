@@ -16,10 +16,10 @@ h1 {
     font-family: 'Segoe UI';
 }
 
-header + div {
+/* header + div {
     @apply h-[calc(100vh-72px)]
-}
+} */
 
-header + div > div {
+/* header + div > div {
     @apply max-w-7xl mx-auto
-}
+} */
