@@ -18,7 +18,7 @@ const Header = () => {
 			<nav className='bg-white shadow'>
 				<div className='flex justify-between items-center mx-auto max-w-7xl p-3'>
 					<Link to="/">
-						<img src="public/global-estates-high-resolution-logo-transparent.svg" alt="" width={200} height="76"/>
+						<img src="/global-estates-high-resolution-logo-transparent.svg" alt="" width={200} height="76"/>
 					</Link>
 					<form className='bg-slate-100 p-3 rounded-lg flex items-center'>
 						<input type="text" placeholder='Search...' className='bg-transparent focus:outline-none w-24 sm:w-64' />
