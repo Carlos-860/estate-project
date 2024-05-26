@@ -23,3 +23,16 @@ h1 {
 /* header + div > div {
     @apply max-w-7xl mx-auto
 } */
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: white;
+    visibility: hidden;
+}
+
+.swiper-wrapper:hover + .swiper-button-prev, 
+.swiper-wrapper:hover ~ .swiper-button-next,
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+visibility: visible;
+}
