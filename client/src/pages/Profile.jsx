@@ -134,6 +134,23 @@ const Profile = () => {
         }
     }
 
+    const handleListingDelete= async (listingId) => {
+        try {
+            const res = await fetch(`/api/listing/delete/${listingId}`, {
+                method: 'DELETE'
+            });
+            const data = await res.json();
+
+            if (data.success === false) return
+
+            setUserListings(()=> (
+                userListings.filter((item) => item._id !== listingId)
+            ))
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     useEffect(() => {
         console.log(userListings);
     }, [userListings])
@@ -205,7 +222,7 @@ const Profile = () => {
 
             {userListings && userListings.length > 0 &&
                 <div className="flex flex-col gap-4">
-                <h1 className="text-center mt-7 text-sxl font-semibold">Your Listings</h1>
+                    <h1 className="text-center mt-7 text-sxl font-semibold">Your Listings</h1>
                     {userListings.map((listing) => (
                         <div key={listing._id} className="border rounded-lg p-3 flex justify-between items-center gap-4">
                             <Link to={'/listing/' + listing._id}>
@@ -215,7 +232,7 @@ const Profile = () => {
                                 <p>{listing.name}</p>
                             </Link>
                             <div className="flex flex-col items-center">
-                                <button className="text-red-700 uppercase">Delete</button>
+                                <button onClick={() => handleListingDelete(listing._id)} className="text-red-700 uppercase">Delete</button>
                                 <button className="text-green-700 uppercase">Edit</button>
                             </div>
                         </div>
