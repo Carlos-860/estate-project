@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Error from './components/Error';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 const App = () => {
     return (
@@ -34,6 +35,7 @@ const AppContent = () => {
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/search" element={<Search />} />
                 <Route path="/listing/:id" element={<Listing />} />
 
                 <Route element={<PrivateRoute />}>
