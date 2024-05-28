@@ -17,7 +17,7 @@ const Search = () => {
     });
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
-    console.log(listings)
+    const [showMore, setShowMore] = useState(false);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
@@ -55,6 +55,9 @@ const Search = () => {
 
             const res = await fetch(`/api/listing/get?${searchQuery}`);
             const data = await res.json();
+            if (data.length > 8) {
+                setShowMore(true);
+            }
             setListings(data);
             setLoading(false);
         }
@@ -105,6 +108,12 @@ const Search = () => {
         urlParams.set('order', sidebardata.order);
         const searchQuery = urlParams.toString();
         navigate('/search?' + searchQuery);
+    }
+
+    const onShowMoreClick = async () => {
+        // const numberOfListings = listings.length;
+        // const startIndex = numberOfListings;
+        // const urlParams = new URLSearchParams(location.search);
     }
 
     return (
@@ -217,12 +226,12 @@ const Search = () => {
                 <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-2 p-12">
                     {listings && !loading && listings.map((listing) => {
                         return (
-                            <ListingItem key={listing._id} listing={listing}/>
+                            <ListingItem key={listing._id} listing={listing} />
                         )
                     }
                     )}
                     {loading && (
-                        Array.from([1,2], () => (
+                        Array.from([1, 2], () => (
                             <div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
                                 <div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
                                     <Skeleton circle={false} height={384} width={'100%'} />
@@ -251,6 +260,11 @@ const Search = () => {
                     )}
                     {listings.length === 0 && !loading && (
                         <div className="text-xl w-full col-span-2 text-cente text-slate-700">No listings match</div>
+                    )}
+                    {showMore && (
+                        <div className="col-span-2 flex justify-center">
+                            <button onClick={onShowMoreClick} className="flex max-w-md w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">Show more</button>
+                        </div>
                     )}
                 </div>
             </div>
