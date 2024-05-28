@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import ListingItem from '../components/ListingItem';
 
 const Search = () => {
     const navigate = useNavigate();
@@ -120,6 +122,7 @@ const Search = () => {
                             className="border rounded-lg p-3 w-full"
                             value={sidebardata.searchTerm}
                             onChange={handleChange}
+                            onBlur={handleSubmit}
                         />
                     </div>
 
@@ -210,7 +213,45 @@ const Search = () => {
                             <option value="createdAt_asc">Oldest</option>
                         </select>
                     </div>
-
+                </div>
+                <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-2 p-12">
+                    {listings && !loading && listings.map((listing) => {
+                        return (
+                            <ListingItem key={listing._id} listing={listing}/>
+                        )
+                    }
+                    )}
+                    {loading && (
+                        Array.from([1,2], () => (
+                            <div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+                                <div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
+                                    <Skeleton circle={false} height={384} width={'100%'} />
+                                </div>
+                                <div class="flex flex-1 flex-col space-y-2 p-4">
+                                    <h3 class="text-sm font-medium text-gray-900">
+                                        <div>
+                                            <Skeleton circle={false} height={32} width={56} />
+                                        </div>
+                                    </h3>
+                                    <p class="text-sm text-gray-500 line-clamp-3">
+                                        <Skeleton circle={false} height={85} width={'100%'} />
+                                    </p>
+                                    <div class="flex flex-1 flex-col justify-end">
+                                        <p class="text-base font-medium text-gray-900">
+                                            <Skeleton circle={false} height={32} width={56} />
+                                        </p>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <div><Skeleton circle={false} height={16} width={28} /></div>
+                                        <div><Skeleton circle={false} height={16} width={28} /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                    {listings.length === 0 && !loading && (
+                        <div className="text-xl w-full col-span-2 text-cente text-slate-700">No listings match</div>
+                    )}
                 </div>
             </div>
         </form>
