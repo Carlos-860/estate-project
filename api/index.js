@@ -14,7 +14,7 @@ import listingRouter from './routes/listing.route.js';
 dotenv.config()
 
 // Connect to Mongo database
-mongoose.connect(process.env.MONGO)
+await mongoose.connect(process.env.MONGO)
     .then(() => {
         console.log('Connected to MongoDB!')
     })
