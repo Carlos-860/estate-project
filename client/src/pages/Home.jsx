@@ -150,7 +150,7 @@ const Home = () => {
         actionText={`Create new listing`}
       >
         <div className="grid grid-cols-3 gap-2">
-          {offerListings && offerListings.map((listing) => (
+          {offerListings.length !== 0 && offerListings.map((listing) => (
             <ListingItem listing={listing} key={listing._id} />
           ))}
 
@@ -192,7 +192,7 @@ const Home = () => {
         actionText={`Create new listing`}
       >
         <div className="grid grid-cols-3 gap-2">
-          {rentListings && rentListings.map((listing) => (
+          {rentListings.length !== 0 && rentListings.map((listing) => (
             <ListingItem listing={listing} key={listing._id} />
           ))}
 
@@ -234,7 +234,7 @@ const Home = () => {
         actionText={`Create new listing`}
       >
         <div className="grid grid-cols-3 gap-2">
-          {saleListings && saleListings.map((listing) => (
+          {saleListings.length !== 0 && saleListings.map((listing) => (
             <ListingItem listing={listing} key={listing._id} />
           ))}
 
