@@ -224,29 +224,26 @@ const Search = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-2 p-12">
-                    {listings && !loading && listings.map((listing) => {
-                        return (
-                            <ListingItem key={listing._id} listing={listing} />
-                        )
-                    }
-                    )}
+                    {!loading && listings && listings.map((listing) => (
+                        <ListingItem key={listing._id} listing={listing} />
+                    ))}
                     {loading && (
                         Array.from([1, 2], () => (
-                            <div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
-                                <div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
+                            <div className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+                                <div className="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
                                     <Skeleton circle={false} height={384} width={'100%'} />
                                 </div>
-                                <div class="flex flex-1 flex-col space-y-2 p-4">
-                                    <h3 class="text-sm font-medium text-gray-900">
+                                <div className="flex flex-1 flex-col space-y-2 p-4">
+                                    <h3 className="text-sm font-medium text-gray-900">
                                         <div>
                                             <Skeleton circle={false} height={32} width={56} />
                                         </div>
                                     </h3>
-                                    <p class="text-sm text-gray-500 line-clamp-3">
+                                    <p className="text-sm text-gray-500 line-clamp-3">
                                         <Skeleton circle={false} height={85} width={'100%'} />
                                     </p>
-                                    <div class="flex flex-1 flex-col justify-end">
-                                        <p class="text-base font-medium text-gray-900">
+                                    <div className="flex flex-1 flex-col justify-end">
+                                        <p className="text-base font-medium text-gray-900">
                                             <Skeleton circle={false} height={32} width={56} />
                                         </p>
                                     </div>
@@ -263,7 +260,11 @@ const Search = () => {
                     )}
                     {showMore && (
                         <div className="col-span-2 flex justify-center">
-                            <button onClick={onShowMoreClick} className="flex max-w-md w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">Show more</button>
+                            <button
+                                onClick={onShowMoreClick}
+                                className="flex max-w-md w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
+                                Show more
+                            </button>
                         </div>
                     )}
                 </div>
