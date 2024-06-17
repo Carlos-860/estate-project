@@ -10,7 +10,7 @@ const SectionHeading = ({ heading, url, actionText, actionUrl, children }) => {
 
   return (
     <>
-      <div className="max-w-6xl mx-auto my-12">
+      <div className="max-w-6xl mx-auto my-12 px-6">
         <div className="sm:flex sm:items-baseline sm:justify-between sm:mb-4">
           <div className="flex-1">
             <h1 className="text-base font-semibold leading-6 text-slate-600">{heading}</h1>
@@ -149,7 +149,7 @@ const Home = () => {
         actionUrl={`create-listing`}
         actionText={`Create new listing`}
       >
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-2">
           {offerListings.length !== 0 && offerListings.map((listing) => (
             <ListingItem listing={listing} key={listing._id} />
           ))}
@@ -191,7 +191,7 @@ const Home = () => {
         actionUrl={`create-listing`}
         actionText={`Create new listing`}
       >
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
           {rentListings.length !== 0 && rentListings.map((listing) => (
             <ListingItem listing={listing} key={listing._id} />
           ))}
@@ -233,13 +233,13 @@ const Home = () => {
         actionUrl={`create-listing`}
         actionText={`Create new listing`}
       >
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
           {saleListings.length !== 0 && saleListings.map((listing) => (
             <ListingItem listing={listing} key={listing._id} />
           ))}
 
           {loading && saleListings.length === 0 && (
-             Array.from([1, 2, 3], (item, index) => (
+            Array.from([1, 2, 3], (item, index) => (
               <div key={index} className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
                 <div className="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
                   <Skeleton circle={false} height={384} width={'100%'} />

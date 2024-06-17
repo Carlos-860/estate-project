@@ -28,9 +28,14 @@ export const signin = async (req, res, next) => {
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
         const { password: pass, ...rest } = validUser._doc; // remove password from response
-        res.cookie('access_token', token, { httpOnly: true })
-            .status(200)
-            .json(rest);
+
+        if (req.headers['user-agent'].includes('Mobile')) {
+            res.status(200).json({ token, ...rest });
+        } else {
+            res.cookie('access_token', token, { httpOnly: true })
+                .status(200)
+                .json(rest);
+        }
     } catch (error) {
         next(error);
     }
